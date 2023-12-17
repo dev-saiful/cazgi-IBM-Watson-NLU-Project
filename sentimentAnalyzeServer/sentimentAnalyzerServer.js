@@ -29,9 +29,9 @@ function getNLUInstance() {
     const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
         version: '2021-08-01',
         authenticator: new IamAuthenticator ({
-            apikey: api_key
+            apikey: process.env.API_KEY
         }),
-        serviceUrl: api_url
+        serviceUrl: process.env.API_URL
     });
     return naturalLanguageUnderstanding;
 }
@@ -46,6 +46,7 @@ app.get("/",(req,res)=>{
 app.get("/url/emotion", (req,res) => {
     // //Extract the url passed from the client through the request object
     let urlToAnalyze = req.query.url
+  
     const analyzeParams = 
         {
             "url": urlToAnalyze,
@@ -72,6 +73,7 @@ app.get("/url/emotion", (req,res) => {
 //The endpoint for the webserver ending with /url/sentiment
 app.get("/url/sentiment", (req,res) => {
     let urlToAnalyze = req.query.url
+    
     const analyzeParams = 
     {
         "url": urlToAnalyze,
@@ -93,7 +95,7 @@ app.get("/url/sentiment", (req,res) => {
     .catch(err => {
         return res.send("Could not do desired operation "+err);
     });
-    return res.send("url sentiment for "+req.query.url);
+    // return res.send("url sentiment for "+req.query.url);
 });
 
 //The endpoint for the webserver ending with /text/emotion
@@ -120,11 +122,12 @@ app.get("/text/emotion", (req,res) => {
     .catch(err => {
         return res.send("Could not do desired operation "+err);
     });
-    return res.send({"happy":"10","sad":"90"});
+    // return res.send({"happy":"10","sad":"90"});
 });
 
 app.get("/text/sentiment", (req,res) => {
     let textToAnalyze = req.query.text
+   
     const analyzeParams = 
     {
         "text": textToAnalyze,
@@ -146,7 +149,7 @@ app.get("/text/sentiment", (req,res) => {
     .catch(err => {
         return res.send("Could not do desired operation "+err);
     });
-    return res.send("text sentiment for "+req.query.text);
+    // return res.send("text sentiment for "+req.query.text);
 });
 
 let server = app.listen(8080, () => {

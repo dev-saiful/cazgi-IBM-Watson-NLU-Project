@@ -39,9 +39,10 @@ class App extends React.Component {
   
   sendForSentimentAnalysis = () => {
     this.setState({sentiment:true});
-    let url = ".";
+    let url = "https://saifulcseian-8080.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai";
     let mode = this.state.mode
     url = url+"/" + mode + "/sentiment?"+ mode + "="+document.getElementById("textinput").value;
+    console.log(url);
 
     fetch(url).then((response)=>{
         response.json().then((data)=>{
@@ -61,7 +62,7 @@ class App extends React.Component {
   sendForEmotionAnalysis = () => {
 
     this.setState({sentiment:false});
-    let url = ".";
+    let url = "https://saifulcseian-8080.theiadockernext-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai";
     let mode = this.state.mode
     url = url+"/" + mode + "/emotion?"+ mode + "="+document.getElementById("textinput").value;
 
